@@ -22,6 +22,8 @@
 		14798BA525E4F25F004D91B8 /* ArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14798B9F25E4F25F004D91B8 /* ArticleService.swift */; };
 		14798BA625E4F25F004D91B8 /* ArticleRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14798BA125E4F25F004D91B8 /* ArticleRepository.swift */; };
 		14798BAC25E4F465004D91B8 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 14798BAB25E4F465004D91B8 /* Alamofire */; };
+		14798BB425E4FDA7004D91B8 /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14798BB325E4FDA7004D91B8 /* ArticleListView.swift */; };
+		14798BBC25E4FDBB004D91B8 /* ArticleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14798BBB25E4FDBB004D91B8 /* ArticleListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		14798B9E25E4F25F004D91B8 /* RestAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestAPI.swift; sourceTree = "<group>"; };
 		14798B9F25E4F25F004D91B8 /* ArticleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleService.swift; sourceTree = "<group>"; };
 		14798BA125E4F25F004D91B8 /* ArticleRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleRepository.swift; sourceTree = "<group>"; };
+		14798BB325E4FDA7004D91B8 /* ArticleListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
+		14798BBB25E4FDBB004D91B8 /* ArticleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,7 @@
 			children = (
 				14798B8925E4F15B004D91B8 /* Domain */,
 				14798B9825E4F25F004D91B8 /* Data */,
+				14798BB025E4FD1F004D91B8 /* App */,
 				14798B4125E4ED90004D91B8 /* SwiftUICleanArchitectureApp.swift */,
 				14798B4325E4ED90004D91B8 /* ContentView.swift */,
 				14798B4525E4ED91004D91B8 /* Assets.xcassets */,
@@ -218,6 +223,31 @@
 				14798BA125E4F25F004D91B8 /* ArticleRepository.swift */,
 			);
 			path = Repositories;
+			sourceTree = "<group>";
+		};
+		14798BB025E4FD1F004D91B8 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				14798BB125E4FD2A004D91B8 /* Screens */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		14798BB125E4FD2A004D91B8 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				14798BB225E4FD83004D91B8 /* ArticleList */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		14798BB225E4FD83004D91B8 /* ArticleList */ = {
+			isa = PBXGroup;
+			children = (
+				14798BB325E4FDA7004D91B8 /* ArticleListView.swift */,
+				14798BBB25E4FDBB004D91B8 /* ArticleListViewModel.swift */,
+			);
+			path = ArticleList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14798B4425E4ED90004D91B8 /* ContentView.swift in Sources */,
+				14798BB425E4FDA7004D91B8 /* ArticleListView.swift in Sources */,
 				14798B8F25E4F15B004D91B8 /* ArticleUseCase.swift in Sources */,
 				14798BA425E4F25F004D91B8 /* RestAPI.swift in Sources */,
 				14798B9025E4F15B004D91B8 /* CodableDefault.swift in Sources */,
@@ -364,6 +395,7 @@
 				14798B4225E4ED90004D91B8 /* SwiftUICleanArchitectureApp.swift in Sources */,
 				14798B9125E4F15B004D91B8 /* Article.swift in Sources */,
 				14798BA625E4F25F004D91B8 /* ArticleRepository.swift in Sources */,
+				14798BBC25E4FDBB004D91B8 /* ArticleListViewModel.swift in Sources */,
 				14798BA225E4F25F004D91B8 /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

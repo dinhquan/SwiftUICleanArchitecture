@@ -65,6 +65,22 @@ extension RestAPI {
     }
     
     func request<T: Decodable>(returnType: T.Type) -> AnyPublisher<T, Error> {
+        if Config.current.mockEnabled,
+           !mockFile.isEmpty,
+           let path = Bundle.main.path(forResource: mockFile, ofType: ""),
+           let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+            let decoder = JSONDecoder()
+            do {
+                let value = try decoder.decode(returnType, from: data)
+                return Just(value)
+                    .mapError { _ in ResponseError(type: .unknown, error: nil, afError: nil) }
+                    .eraseToAnyPublisher()
+            } catch {
+                let error = ResponseError(type: .json, error: error, afError: nil)
+                return Fail(error: error).eraseToAnyPublisher()
+            }
+        }
+        
         let url = "\(Config.current.baseUrl)/\(path)"
         return AF.request(url,
                           method: method.afMethod,
@@ -77,6 +93,22 @@ extension RestAPI {
     }
     
     func request<T: Decodable, K: Encodable>(returnType: T.Type, paramType: K.Type, params: K) -> AnyPublisher<T, Error> {
+        if Config.current.mockEnabled,
+           !mockFile.isEmpty,
+           let path = Bundle.main.path(forResource: mockFile, ofType: ""),
+           let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
+            let decoder = JSONDecoder()
+            do {
+                let value = try decoder.decode(returnType, from: data)
+                return Just(value)
+                    .mapError { _ in ResponseError(type: .unknown, error: nil, afError: nil) }
+                    .eraseToAnyPublisher()
+            } catch {
+                let error = ResponseError(type: .json, error: error, afError: nil)
+                return Fail(error: error).eraseToAnyPublisher()
+            }
+        }
+        
         let url = "\(Config.current.baseUrl)/\(path)"
         return AF.request(url,
                           method: method.afMethod,
@@ -88,25 +120,5 @@ extension RestAPI {
             .value()
             .mapError { ResponseError(type: .af, error: nil, afError: $0) }
             .eraseToAnyPublisher()
-    }
-
-    private func handleMock<T: Decodable>(returnType: T.Type, completion: @escaping (_ result: T?, _ error: ResponseError?) -> Void) -> Bool {
-        if Config.current.mockEnabled,
-           !mockFile.isEmpty,
-           let path = Bundle.main.path(forResource: mockFile, ofType: ""),
-           let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
-            let decoder = JSONDecoder()
-            do {
-                let value = try decoder.decode(returnType, from: data)
-                completion(value, nil)
-            } catch {
-                let error = ResponseError(type: .json, error: error, afError: nil)
-                completion(nil, error)
-            }
-
-            return true
-        }
-
-        return false
     }
 }
