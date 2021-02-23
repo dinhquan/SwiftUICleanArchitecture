@@ -82,6 +82,8 @@ extension RestAPI {
         }
         
         let url = "\(Config.current.baseUrl)/\(path)"
+        print(">>> Network Request \(method.rawValue):", url)
+
         return AF.request(url,
                           method: method.afMethod,
                           headers: headers)
@@ -108,8 +110,10 @@ extension RestAPI {
                 return Fail(error: error).eraseToAnyPublisher()
             }
         }
-        
+
         let url = "\(Config.current.baseUrl)/\(path)"
+        print(">>> Network Request \(method.rawValue):", url)
+
         return AF.request(url,
                           method: method.afMethod,
                           parameters: params,

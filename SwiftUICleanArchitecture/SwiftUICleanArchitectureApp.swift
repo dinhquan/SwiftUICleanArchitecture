@@ -11,7 +11,15 @@ import SwiftUI
 struct SwiftUICleanArchitectureApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ArticleListView(viewModel: .init())
+        }
+    }
+}
+
+extension Resolver: ResolverRegistering {
+    public static func registerAllServices() {
+        register {
+            ArticleRepository() as ArticleUseCase
         }
     }
 }

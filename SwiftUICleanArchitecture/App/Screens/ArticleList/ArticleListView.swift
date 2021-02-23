@@ -8,13 +8,28 @@
 import SwiftUI
 
 struct ArticleListView: View {
+    @ObservedObject var viewModel: ArticleListViewModel
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            List(viewModel.articles) { article in
+                ArticleListRow(article: article)
+            }
+        }
+        .onAppear(perform: {
+            self.viewModel.onAppear.send()
+        })
     }
 }
 
 struct ArticleListView_Previews: PreviewProvider {
     static var previews: some View {
-        ArticleListView()
+        ArticleListView(viewModel: .init())
+    }
+}
+
+extension Article: Identifiable {
+    var id: String {
+        title
     }
 }
