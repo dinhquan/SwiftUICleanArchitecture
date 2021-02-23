@@ -27,8 +27,8 @@ final class ArticleListViewModel: ObservableObject {
         onAppear
             .flatMap {
                 return self.articleUseCase
-                .findArticlesByKeyword("Tesla", pageSize: 20, page: 1)
-                .replaceError(with: [])
+                    .findArticlesByKeyword("Tesla", pageSize: 20, page: 1)
+                    .replaceError(with: [])
             }
             .eraseToAnyPublisher()
             .assign(to: \ArticleListViewModel.articles, on: self)
