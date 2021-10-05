@@ -12,13 +12,23 @@ struct ArticleListView: View {
     
     var body: some View {
         NavigationView {
-            List(viewModel.articles) { article in
-                ArticleListRow(article: article)
+            VStack {
+                List(viewModel.articles) { article in
+                    ArticleListRow(article: article)
+                }
+                if viewModel.isFetching {
+                    ProgressView()
+                }
+                Button("Load Articles") {
+                    Task {
+                        try? await viewModel.fetchArticles()
+                    }
+                }
             }
         }
-        .onAppear(perform: {
-            self.viewModel.onAppear.send()
-        })
+//        .task {
+//            try? await viewModel.fetchArticles()
+//        }
     }
 }
 

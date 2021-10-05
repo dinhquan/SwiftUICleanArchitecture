@@ -21,5 +21,8 @@ extension Resolver: ResolverRegistering {
         register {
             ArticleRepository() as ArticleUseCase
         }
+        register {
+            DefaultArticleConcurrencyUseCase() as ArticleConcurrencyUseCase
+        }
     }
 }

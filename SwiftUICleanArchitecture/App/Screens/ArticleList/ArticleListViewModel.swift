@@ -6,32 +6,19 @@
 //
 
 import Foundation
-import Combine
 
 final class ArticleListViewModel: ObservableObject {
     @Injected var articleUseCase: ArticleUseCase
-    
-    private var disposables = Set<AnyCancellable>()
-    
-    /// Mark: Input
-    let onAppear = PassthroughSubject<Void, Never>()
-    
-    /// Mark: Output
+    @Injected var articleConcurrencyUseCase: ArticleConcurrencyUseCase
+
     @Published private(set) var articles: [Article] = []
-    
-    init() {
-        transform()
-    }
-    
-    private func transform() {
-        onAppear
-            .flatMap {
-                return self.articleUseCase
-                    .findArticlesByKeyword("Tesla", pageSize: 20, page: 1)
-                    .replaceError(with: [])
-            }
-            .eraseToAnyPublisher()
-            .assign(to: \ArticleListViewModel.articles, on: self)
-            .store(in: &disposables)
+    @Published private(set) var isFetching = false
+
+    @MainActor
+    func fetchArticles() async throws {
+        isFetching = true
+        defer { isFetching = false }
+
+        articles = try await articleConcurrencyUseCase.findArticlesByKeyword("Tesla", pageSize: 20, page: 1)
     }
 }
