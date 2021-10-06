@@ -17,6 +17,12 @@ struct Article: Decodable {
     @Default.Empty var content: String
 }
 
+extension Article: Identifiable {
+    var id: String {
+        title
+    }
+}
+
 extension Article {
     var formattedPublishedAt: String {
         let formatter = DateFormatter()

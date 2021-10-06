@@ -7,23 +7,24 @@
 
 import Foundation
 
-protocol EnvConfiguration {
+protocol EnvironmentParam {
     var baseUrl: String { get }
     var apiKey: String { get }
+    var isEnabledNetworkMock: Bool { get }
 }
 
-struct Config {
-    // TODO: automatically environment switch by Bundle Id
-    static let current = Dev()
+struct Environment {
+    static let current = Development()
 
-    struct Dev: EnvConfiguration {
+    struct Development: EnvironmentParam {
         let baseUrl = "http://newsapi.org/v2"
         let apiKey = "ff5445a21c1d44c4928c1c3f0e7ed0f6"
-        let mockEnabled = false
+        let isEnabledNetworkMock = true
     }
 
-    struct Prod: EnvConfiguration {
+    struct Production: EnvironmentParam {
         let baseUrl = "http://newsapi.org/v2"
         let apiKey = "ff5445a21c1d44c4928c1c3f0e7ed0f6"
+        let isEnabledNetworkMock = false
     }
 }

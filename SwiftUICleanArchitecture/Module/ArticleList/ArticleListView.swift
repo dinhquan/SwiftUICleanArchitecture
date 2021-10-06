@@ -26,20 +26,11 @@ struct ArticleListView: View {
                 }
             }
         }
-//        .task {
-//            try? await viewModel.fetchArticles()
-//        }
     }
 }
 
 struct ArticleListView_Previews: PreviewProvider {
     static var previews: some View {
         ArticleListView(viewModel: .init())
-    }
-}
-
-extension Article: Identifiable {
-    var id: String {
-        title
     }
 }
