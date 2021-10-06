@@ -25,6 +25,5 @@ class ArticleListViewModelTests: XCTestCase {
         XCTAssertFalse(viewModel.isFetching)
         XCTAssertEqual(viewModel.articles.count, 20)
     }
-
 }
 

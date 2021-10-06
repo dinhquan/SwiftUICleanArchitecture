@@ -28,6 +28,7 @@
 		140E7F84270DA88600AA0D36 /* MockLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F83270DA88600AA0D36 /* MockLoader.swift */; };
 		140E7F87270DA9EB00AA0D36 /* MockArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F86270DA9EB00AA0D36 /* MockArticleService.swift */; };
 		140E7F8A270DAA3C00AA0D36 /* searchArticles.json in Resources */ = {isa = PBXBuildFile; fileRef = 140E7F89270DAA3C00AA0D36 /* searchArticles.json */; };
+		140E7F8D270DB17900AA0D36 /* ArticleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F8C270DB17900AA0D36 /* ArticleTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		140E7F83270DA88600AA0D36 /* MockLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoader.swift; sourceTree = "<group>"; };
 		140E7F86270DA9EB00AA0D36 /* MockArticleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockArticleService.swift; sourceTree = "<group>"; };
 		140E7F89270DAA3C00AA0D36 /* searchArticles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = searchArticles.json; sourceTree = "<group>"; };
+		140E7F8C270DB17900AA0D36 /* ArticleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,8 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				140E7F7F270DA6A000AA0D36 /* Helper */,
-				140E7F88270DAA1B00AA0D36 /* MockData */,
-				140E7F85270DA88B00AA0D36 /* MockService */,
+				140E7F8B270DB15300AA0D36 /* Model */,
 				140E7F80270DA86200AA0D36 /* ViewModel */,
 			);
 			path = SwiftUICleanArchitectureTests;
@@ -247,6 +248,8 @@
 			isa = PBXGroup;
 			children = (
 				140E7F83270DA88600AA0D36 /* MockLoader.swift */,
+				140E7F85270DA88B00AA0D36 /* MockService */,
+				140E7F88270DAA1B00AA0D36 /* MockData */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -273,6 +276,14 @@
 				140E7F89270DAA3C00AA0D36 /* searchArticles.json */,
 			);
 			path = MockData;
+			sourceTree = "<group>";
+		};
+		140E7F8B270DB15300AA0D36 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				140E7F8C270DB17900AA0D36 /* ArticleTests.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,6 +437,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				140E7F8D270DB17900AA0D36 /* ArticleTests.swift in Sources */,
 				140E7F82270DA87700AA0D36 /* ArticleListViewModelTests.swift in Sources */,
 				140E7F87270DA9EB00AA0D36 /* MockArticleService.swift in Sources */,
 				140E7F84270DA88600AA0D36 /* MockLoader.swift in Sources */,
