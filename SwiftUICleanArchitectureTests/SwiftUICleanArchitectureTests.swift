@@ -2,7 +2,7 @@
 //  SwiftUICleanArchitectureTests.swift
 //  SwiftUICleanArchitectureTests
 //
-//  Created by Quan on 2/23/21.
+//  Created by Quan on 10/6/21.
 //
 
 import XCTest

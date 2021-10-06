@@ -7,9 +7,6 @@
 
 import Foundation
 
-
-import Foundation
-
 protocol EnvConfiguration {
     var baseUrl: String { get }
     var apiKey: String { get }
