@@ -7,12 +7,13 @@
 
 import Foundation
 
-@MainActor final class ArticleListViewModel: ObservableObject {
+final class ArticleListViewModel: ObservableObject {
     @Injected var articleService: ArticleService
 
     @Published private(set) var articles: [Article] = []
     @Published private(set) var isFetching = false
 
+    @MainActor
     func fetchArticles() async throws {
         isFetching = true
         defer { isFetching = false }

@@ -10,7 +10,6 @@
 		140E7F34270D815300AA0D36 /* SwiftUICleanArchitectureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F33270D815300AA0D36 /* SwiftUICleanArchitectureApp.swift */; };
 		140E7F38270D815600AA0D36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140E7F37270D815600AA0D36 /* Assets.xcassets */; };
 		140E7F3B270D815600AA0D36 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140E7F3A270D815600AA0D36 /* Preview Assets.xcassets */; };
-		140E7F45270D815700AA0D36 /* SwiftUICleanArchitectureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F44270D815700AA0D36 /* SwiftUICleanArchitectureTests.swift */; };
 		140E7F4F270D815700AA0D36 /* SwiftUICleanArchitectureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F4E270D815700AA0D36 /* SwiftUICleanArchitectureUITests.swift */; };
 		140E7F51270D815700AA0D36 /* SwiftUICleanArchitectureUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F50270D815700AA0D36 /* SwiftUICleanArchitectureUITestsLaunchTests.swift */; };
 		140E7F6F270D843100AA0D36 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F5E270D843100AA0D36 /* Article.swift */; };
@@ -25,6 +24,10 @@
 		140E7F78270D843100AA0D36 /* ArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F6E270D843100AA0D36 /* ArticleService.swift */; };
 		140E7F7B270D8DB800AA0D36 /* ArticleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F7A270D8DB800AA0D36 /* ArticleAPI.swift */; };
 		140E7F7D270D8E6B00AA0D36 /* RestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F7C270D8E6B00AA0D36 /* RestAPI.swift */; };
+		140E7F82270DA87700AA0D36 /* ArticleListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F81270DA87700AA0D36 /* ArticleListViewModelTests.swift */; };
+		140E7F84270DA88600AA0D36 /* MockLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F83270DA88600AA0D36 /* MockLoader.swift */; };
+		140E7F87270DA9EB00AA0D36 /* MockArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F86270DA9EB00AA0D36 /* MockArticleService.swift */; };
+		140E7F8A270DAA3C00AA0D36 /* searchArticles.json in Resources */ = {isa = PBXBuildFile; fileRef = 140E7F89270DAA3C00AA0D36 /* searchArticles.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +53,6 @@
 		140E7F37270D815600AA0D36 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		140E7F3A270D815600AA0D36 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		140E7F40270D815700AA0D36 /* SwiftUICleanArchitectureTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUICleanArchitectureTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		140E7F44270D815700AA0D36 /* SwiftUICleanArchitectureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICleanArchitectureTests.swift; sourceTree = "<group>"; };
 		140E7F4A270D815700AA0D36 /* SwiftUICleanArchitectureUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftUICleanArchitectureUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		140E7F4E270D815700AA0D36 /* SwiftUICleanArchitectureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICleanArchitectureUITests.swift; sourceTree = "<group>"; };
 		140E7F50270D815700AA0D36 /* SwiftUICleanArchitectureUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICleanArchitectureUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -67,6 +69,10 @@
 		140E7F79270D850600AA0D36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		140E7F7A270D8DB800AA0D36 /* ArticleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleAPI.swift; sourceTree = "<group>"; };
 		140E7F7C270D8E6B00AA0D36 /* RestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAPI.swift; sourceTree = "<group>"; };
+		140E7F81270DA87700AA0D36 /* ArticleListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListViewModelTests.swift; sourceTree = "<group>"; };
+		140E7F83270DA88600AA0D36 /* MockLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLoader.swift; sourceTree = "<group>"; };
+		140E7F86270DA9EB00AA0D36 /* MockArticleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockArticleService.swift; sourceTree = "<group>"; };
+		140E7F89270DAA3C00AA0D36 /* searchArticles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = searchArticles.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +147,10 @@
 		140E7F43270D815700AA0D36 /* SwiftUICleanArchitectureTests */ = {
 			isa = PBXGroup;
 			children = (
-				140E7F44270D815700AA0D36 /* SwiftUICleanArchitectureTests.swift */,
+				140E7F7F270DA6A000AA0D36 /* Helper */,
+				140E7F88270DAA1B00AA0D36 /* MockData */,
+				140E7F85270DA88B00AA0D36 /* MockService */,
+				140E7F80270DA86200AA0D36 /* ViewModel */,
 			);
 			path = SwiftUICleanArchitectureTests;
 			sourceTree = "<group>";
@@ -232,6 +241,38 @@
 				140E7F7A270D8DB800AA0D36 /* ArticleAPI.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		140E7F7F270DA6A000AA0D36 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				140E7F83270DA88600AA0D36 /* MockLoader.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		140E7F80270DA86200AA0D36 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				140E7F81270DA87700AA0D36 /* ArticleListViewModelTests.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		140E7F85270DA88B00AA0D36 /* MockService */ = {
+			isa = PBXGroup;
+			children = (
+				140E7F86270DA9EB00AA0D36 /* MockArticleService.swift */,
+			);
+			path = MockService;
+			sourceTree = "<group>";
+		};
+		140E7F88270DAA1B00AA0D36 /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				140E7F89270DAA3C00AA0D36 /* searchArticles.json */,
+			);
+			path = MockData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -348,6 +389,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				140E7F8A270DAA3C00AA0D36 /* searchArticles.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -384,7 +426,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				140E7F45270D815700AA0D36 /* SwiftUICleanArchitectureTests.swift in Sources */,
+				140E7F82270DA87700AA0D36 /* ArticleListViewModelTests.swift in Sources */,
+				140E7F87270DA9EB00AA0D36 /* MockArticleService.swift in Sources */,
+				140E7F84270DA88600AA0D36 /* MockLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,7 +643,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -623,7 +667,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
