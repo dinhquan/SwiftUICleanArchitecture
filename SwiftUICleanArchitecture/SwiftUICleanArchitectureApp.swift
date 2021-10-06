@@ -19,10 +19,7 @@ struct SwiftUICleanArchitectureApp: App {
 extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
         register {
-            ArticleRepository() as ArticleUseCase
-        }
-        register {
-            DefaultArticleConcurrencyUseCase() as ArticleConcurrencyUseCase
+            DefaultArticleService() as ArticleService
         }
     }
 }

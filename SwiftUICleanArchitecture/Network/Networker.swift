@@ -23,6 +23,47 @@ struct Networker {
         case decodeFailure
     }
 
+    static let timeoutInterval = 60.0
+    static let defaultHeaders = ["Content-Type": "application/json"]
+
+    static func request(_ url: String,
+                        method: HttpMethod = .get,
+                        parameters: [String: String]? = nil,
+                        body: [String: Any]? = nil,
+                        headers: [String: String] = defaultHeaders) -> Request {
+        var urlString = url
+
+        if let params = parameters {
+            var components = URLComponents()
+            components.queryItems = params.map {
+                 URLQueryItem(name: $0, value: $1)
+            }
+            urlString = "\(urlString)\(components.string ?? "")"
+        }
+
+        guard let _url = URL(string: urlString) else { return Request(request: nil, preError: .invalidUrl) }
+        var request = URLRequest(url: _url)
+        request.httpMethod = method.rawValue
+        request.timeoutInterval = timeoutInterval
+
+        for (key, value) in headers {
+            request.addValue(value, forHTTPHeaderField: key)
+        }
+
+        if let body = body {
+            do {
+                let data = try JSONSerialization.data(withJSONObject: body, options: [])
+                request.httpBody = data
+            } catch {
+                return Request(request: request, preError: .invalidBody)
+            }
+        }
+
+        return Request(request: request, preError: nil)
+    }
+}
+
+extension Networker {
     struct Request {
         let request: URLRequest?
         let preError: NetworkError?
@@ -77,7 +118,6 @@ struct Networker {
                     failure(error!)
                     return
                 }
-
                 do {
                     let decodable = try JSONDecoder().decode(type, from: data)
                     success(decodable)
@@ -104,46 +144,5 @@ struct Networker {
                 .receive(on: DispatchQueue.main)
                 .eraseToAnyPublisher()
         }
-    }
-
-    static let timeoutInterval = 60.0
-    static var defaultHeaders: [String: String] {
-        ["Content-Type": "application/json"]
-    }
-
-    static func request(_ url: String,
-                        method: HttpMethod = .get,
-                        parameters: [String: String]? = nil,
-                        body: [String: Any]? = nil,
-                        headers: [String: String] = defaultHeaders) -> Request {
-        var urlString = url
-
-        if let params = parameters {
-            var components = URLComponents()
-            components.queryItems = params.map {
-                 URLQueryItem(name: $0, value: $1)
-            }
-            urlString = "\(urlString)\(components.string ?? "")"
-        }
-
-        guard let _url = URL(string: urlString) else { return Request(request: nil, preError: .invalidUrl) }
-        var request = URLRequest(url: _url)
-        request.httpMethod = method.rawValue
-        request.timeoutInterval = timeoutInterval
-
-        for (key, value) in headers {
-            request.addValue(value, forHTTPHeaderField: key)
-        }
-
-        if let body = body {
-            do {
-                let data = try JSONSerialization.data(withJSONObject: body, options: [])
-                request.httpBody = data
-            } catch {
-                return Request(request: request, preError: .invalidBody)
-            }
-        }
-
-        return Request(request: request, preError: nil)
     }
 }
