@@ -14,7 +14,9 @@ struct ArticleListView: View {
         NavigationView {
             VStack {
                 List(viewModel.articles) { article in
-                    ArticleListRow(article: article)
+                    NavigationLink(destination: ArticleDetailView(viewModel: ArticleDetailViewModel(article: article))) {
+                        ArticleListRow(article: article)
+                    }
                 }
                 if viewModel.isFetching {
                     ProgressView()
