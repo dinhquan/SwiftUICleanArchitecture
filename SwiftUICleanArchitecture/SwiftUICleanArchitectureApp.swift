@@ -2,7 +2,7 @@
 //  SwiftUICleanArchitectureApp.swift
 //  SwiftUICleanArchitecture
 //
-//  Created by Quan on 2/23/21.
+//  Created by Quan on 10/6/21.
 //
 
 import SwiftUI
@@ -19,7 +19,7 @@ struct SwiftUICleanArchitectureApp: App {
 extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
         register {
-            ArticleRepository() as ArticleUseCase
+            DefaultArticleService() as ArticleService
         }
     }
 }
