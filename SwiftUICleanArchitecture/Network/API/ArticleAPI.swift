@@ -24,7 +24,7 @@ extension ArticleAPI {
         case .fetchArticles(let keyword, let pageSize, let page):
             return [
                 "q": keyword.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed) ?? "",
-                "apiKey": Environment.current.apiKey,
+                "apiKey": NetworkConfig.current.apiKey,
                 "from": "2021-10-01",
                 "sortBy": "publishedAt",
                 "pageSize": "\(pageSize)",

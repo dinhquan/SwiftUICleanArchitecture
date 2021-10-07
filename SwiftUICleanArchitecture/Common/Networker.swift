@@ -8,12 +8,20 @@
 import Foundation
 import Combine
 
-struct Networker {
+struct Networker {}
+
+/// Internal types
+extension Networker {
     enum HttpMethod: String {
         case get = "GET"
         case post = "POST"
         case put = "PUT"
         case delete = "DELETE"
+        case connect = "CONNECT"
+        case head = "HEAD"
+        case options = "OPTIONS"
+        case patch = "PATCH"
+        case trace = "TRACE"
     }
 
     enum NetworkError: Error {
@@ -22,15 +30,28 @@ struct Networker {
         case invalidJSONResponse
         case decodeFailure
     }
+}
 
-    static let timeoutInterval = 60.0
-    static let defaultHeaders = ["Content-Type": "application/json"]
+/// Config
+extension Networker {
+    struct Config {
+        var timeOutInterval: Double
+        var headers: [String: String]
+    }
 
+    static var config = Config(
+        timeOutInterval: 60.0,
+        headers: ["Content-Type": "application/json"]
+    )
+}
+
+/// Request
+extension Networker {
     static func request(_ url: String,
                         method: HttpMethod = .get,
                         parameters: [String: String]? = nil,
                         body: [String: Any]? = nil,
-                        headers: [String: String] = defaultHeaders) -> Request {
+                        headers: [String: String] = config.headers) -> Request {
         var urlString = url
 
         if let params = parameters {
@@ -41,10 +62,12 @@ struct Networker {
             urlString = "\(urlString)\(components.string ?? "")"
         }
 
-        guard let _url = URL(string: urlString) else { return Request(request: nil, preError: .invalidUrl) }
-        var request = URLRequest(url: _url)
+        guard let fullUrl = URL(string: urlString) else {
+            return Request(request: nil, requestError: .invalidUrl)
+        }
+        var request = URLRequest(url: fullUrl)
         request.httpMethod = method.rawValue
-        request.timeoutInterval = timeoutInterval
+        request.timeoutInterval = config.timeOutInterval
 
         for (key, value) in headers {
             request.addValue(value, forHTTPHeaderField: key)
@@ -55,27 +78,28 @@ struct Networker {
                 let data = try JSONSerialization.data(withJSONObject: body, options: [])
                 request.httpBody = data
             } catch {
-                return Request(request: request, preError: .invalidBody)
+                return Request(request: request, requestError: .invalidBody)
             }
         }
 
-        return Request(request: request, preError: nil)
+        return Request(request: request, requestError: nil)
     }
 }
 
+/// Response
 extension Networker {
     struct Request {
         let request: URLRequest?
-        let preError: NetworkError?
+        let requestError: NetworkError?
 
-        init(request: URLRequest?, preError: NetworkError?) {
+        init(request: URLRequest?, requestError: NetworkError?) {
             self.request = request
-            self.preError = preError
+            self.requestError = requestError
         }
 
         func responseDecodable<T: Decodable>(_ type: T.Type) async throws -> T {
             guard let request = request else {
-                throw(preError!)
+                throw(requestError!)
             }
             let (data, _) = try await URLSession.shared.data(for: request)
             let decoder = JSONDecoder()
@@ -84,7 +108,7 @@ extension Networker {
 
         func responseJSON(success: @escaping (_ result: [String: Any]) -> Void, failure: @escaping (_ error: Error) -> Void) {
             guard let request = request else {
-                failure(preError!)
+                failure(requestError!)
                 return
             }
 
@@ -109,7 +133,7 @@ extension Networker {
 
         func responseDecodable<T: Decodable>(_ type: T.Type, success: @escaping (_ result: T) -> Void, failure: @escaping (_ error: Error) -> Void) {
             guard let request = request else {
-                failure(preError!)
+                failure(requestError!)
                 return
             }
 
@@ -132,7 +156,7 @@ extension Networker {
         func responseDecodable<T: Decodable>(_ type: T.Type) -> AnyPublisher<T, Error> {
             guard let request = request,
                   let _ = request.url?.absoluteString else {
-                return Fail(error: preError!)
+                return Fail(error: requestError!)
                     .eraseToAnyPublisher()
             }
 

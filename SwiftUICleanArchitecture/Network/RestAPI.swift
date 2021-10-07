@@ -30,7 +30,7 @@ extension RestAPI {
 
     func call<T: Decodable>(_ type: T.Type) async throws -> T {
         if let mockFile = mockFile,
-           Environment.current.isEnabledNetworkMock,
+           NetworkConfig.current.isEnabledNetworkMock,
             let path = Bundle.main.path(forResource: mockFile, ofType: ""),
             let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
             let decoder = JSONDecoder()
@@ -42,7 +42,7 @@ extension RestAPI {
             }
         }
 
-        let url = "\(Environment.current.baseUrl)/\(path)"
+        let url = "\(NetworkConfig.current.baseUrl)/\(path)"
         return try await Networker.request(url,
                                  method: method,
                                  parameters: parameters,

@@ -20,7 +20,7 @@
 		140E7F74270D843100AA0D36 /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F67270D843100AA0D36 /* ArticleListView.swift */; };
 		140E7F75270D843100AA0D36 /* searchArticles.json in Resources */ = {isa = PBXBuildFile; fileRef = 140E7F6A270D843100AA0D36 /* searchArticles.json */; };
 		140E7F76270D843100AA0D36 /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F6B270D843100AA0D36 /* Networker.swift */; };
-		140E7F77270D843100AA0D36 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F6C270D843100AA0D36 /* Environment.swift */; };
+		140E7F77270D843100AA0D36 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F6C270D843100AA0D36 /* NetworkConfig.swift */; };
 		140E7F78270D843100AA0D36 /* ArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F6E270D843100AA0D36 /* ArticleService.swift */; };
 		140E7F7B270D8DB800AA0D36 /* ArticleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F7A270D8DB800AA0D36 /* ArticleAPI.swift */; };
 		140E7F7D270D8E6B00AA0D36 /* RestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F7C270D8E6B00AA0D36 /* RestAPI.swift */; };
@@ -65,7 +65,7 @@
 		140E7F67270D843100AA0D36 /* ArticleListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
 		140E7F6A270D843100AA0D36 /* searchArticles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = searchArticles.json; sourceTree = "<group>"; };
 		140E7F6B270D843100AA0D36 /* Networker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
-		140E7F6C270D843100AA0D36 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		140E7F6C270D843100AA0D36 /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		140E7F6E270D843100AA0D36 /* ArticleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleService.swift; sourceTree = "<group>"; };
 		140E7F79270D850600AA0D36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		140E7F7A270D8DB800AA0D36 /* ArticleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleAPI.swift; sourceTree = "<group>"; };
@@ -212,7 +212,7 @@
 		140E7F68270D843100AA0D36 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				140E7F6C270D843100AA0D36 /* Environment.swift */,
+				140E7F6C270D843100AA0D36 /* NetworkConfig.swift */,
 				140E7F7C270D8E6B00AA0D36 /* RestAPI.swift */,
 				140E7F7E270D9DFF00AA0D36 /* API */,
 				140E7F69270D843100AA0D36 /* Mock */,
@@ -424,7 +424,7 @@
 				140E7F70270D843100AA0D36 /* CodableDefault.swift in Sources */,
 				140E7F76270D843100AA0D36 /* Networker.swift in Sources */,
 				140E7F6F270D843100AA0D36 /* Article.swift in Sources */,
-				140E7F77270D843100AA0D36 /* Environment.swift in Sources */,
+				140E7F77270D843100AA0D36 /* NetworkConfig.swift in Sources */,
 				140E7F7B270D8DB800AA0D36 /* ArticleAPI.swift in Sources */,
 				140E7F72270D843100AA0D36 /* ArticleListRow.swift in Sources */,
 				140E7F78270D843100AA0D36 /* ArticleService.swift in Sources */,

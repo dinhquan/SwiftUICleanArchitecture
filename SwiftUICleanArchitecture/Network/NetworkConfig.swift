@@ -7,22 +7,22 @@
 
 import Foundation
 
-protocol EnvironmentParam {
+protocol NetworkEnvironment {
     var baseUrl: String { get }
     var apiKey: String { get }
     var isEnabledNetworkMock: Bool { get }
 }
 
-struct Environment {
-    static let current = Development()
+struct NetworkConfig {
+    static let current: NetworkEnvironment = Development()
 
-    struct Development: EnvironmentParam {
+    struct Development: NetworkEnvironment {
         let baseUrl = "http://newsapi.org/v2"
         let apiKey = "ff5445a21c1d44c4928c1c3f0e7ed0f6"
         let isEnabledNetworkMock = true
     }
 
-    struct Production: EnvironmentParam {
+    struct Production: NetworkEnvironment {
         let baseUrl = "http://newsapi.org/v2"
         let apiKey = "ff5445a21c1d44c4928c1c3f0e7ed0f6"
         let isEnabledNetworkMock = false

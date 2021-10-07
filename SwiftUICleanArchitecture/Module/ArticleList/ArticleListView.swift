@@ -24,7 +24,7 @@ struct ArticleListView: View {
                         try? await viewModel.fetchArticles()
                     }
                 }
-            }
+            }.navigationBarTitle("Articles")
         }
     }
 }
