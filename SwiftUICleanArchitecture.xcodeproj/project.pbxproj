@@ -31,7 +31,6 @@
 		140E7F8D270DB17900AA0D36 /* ArticleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F8C270DB17900AA0D36 /* ArticleTests.swift */; };
 		140E7F90270ED71A00AA0D36 /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F8F270ED71A00AA0D36 /* ArticleDetailView.swift */; };
 		140E7F92270ED72F00AA0D36 /* ArticleDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F91270ED72F00AA0D36 /* ArticleDetailViewModel.swift */; };
-		140E7F94270ED96C00AA0D36 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F93270ED96C00AA0D36 /* Navigation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +79,6 @@
 		140E7F8C270DB17900AA0D36 /* ArticleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTests.swift; sourceTree = "<group>"; };
 		140E7F8F270ED71A00AA0D36 /* ArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailView.swift; sourceTree = "<group>"; };
 		140E7F91270ED72F00AA0D36 /* ArticleDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewModel.swift; sourceTree = "<group>"; };
-		140E7F93270ED96C00AA0D36 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,7 +192,6 @@
 			children = (
 				140E7F63270D843100AA0D36 /* ArticleList */,
 				140E7F8E270ED6E800AA0D36 /* ArticleDetail */,
-				140E7F93270ED96C00AA0D36 /* Navigation.swift */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -447,7 +444,6 @@
 				140E7F7B270D8DB800AA0D36 /* ArticleAPI.swift in Sources */,
 				140E7F72270D843100AA0D36 /* ArticleListRow.swift in Sources */,
 				140E7F78270D843100AA0D36 /* ArticleService.swift in Sources */,
-				140E7F94270ED96C00AA0D36 /* Navigation.swift in Sources */,
 				140E7F7D270D8E6B00AA0D36 /* RestAPI.swift in Sources */,
 				140E7F73270D843100AA0D36 /* ArticleListViewModel.swift in Sources */,
 			);
