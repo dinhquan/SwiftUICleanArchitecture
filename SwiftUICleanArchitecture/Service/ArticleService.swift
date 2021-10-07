@@ -13,13 +13,13 @@ struct SearchArticleResult: Decodable {
 }
 
 protocol ArticleService {
-    func findArticlesByKeyword(_ keyword: String, pageSize: Int, page: Int) async throws -> [Article]
+    func searchArticlesByKeyword(_ keyword: String, page: Int) async throws -> [Article]
 }
 
 actor DefaultArticleService: ArticleService {
-    func findArticlesByKeyword(_ keyword: String, pageSize: Int, page: Int) async throws -> [Article] {
+    func searchArticlesByKeyword(_ keyword: String, page: Int) async throws -> [Article] {
         return try await ArticleAPI
-            .fetchArticles(keyword: keyword, pageSize: pageSize, page: page)
+            .searchArticles(keyword: keyword, page: page)
             .call(SearchArticleResult.self)
             .articles
     }

@@ -18,6 +18,6 @@ final class ArticleListViewModel: ObservableObject {
         isFetching = true
         defer { isFetching = false }
 
-        articles = try await articleService.findArticlesByKeyword("Tesla", pageSize: 20, page: 1)
+        articles = try await articleService.searchArticlesByKeyword("Tesla", page: 1)
     }
 }

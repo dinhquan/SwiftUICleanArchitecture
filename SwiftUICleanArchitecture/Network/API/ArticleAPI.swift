@@ -8,26 +8,26 @@
 import Foundation
 
 enum ArticleAPI: RestAPI {
-    case fetchArticles(keyword: String, pageSize: Int, page: Int)
+    case searchArticles(keyword: String, page: Int)
 }
 
 extension ArticleAPI {
     var path: String {
         switch self {
-        case .fetchArticles:
+        case .searchArticles:
             return "everything"
         }
     }
 
     var parameters: [String : String]? {
         switch self {
-        case .fetchArticles(let keyword, let pageSize, let page):
+        case .searchArticles(let keyword, let page):
             return [
                 "q": keyword.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed) ?? "",
                 "apiKey": NetworkConfig.current.apiKey,
                 "from": "2021-10-01",
                 "sortBy": "publishedAt",
-                "pageSize": "\(pageSize)",
+                "pageSize": "20",
                 "page": "\(page)"
             ]
         }
