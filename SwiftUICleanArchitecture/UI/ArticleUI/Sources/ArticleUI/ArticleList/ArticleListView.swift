@@ -27,7 +27,7 @@ struct ArticleListView: View {
                     }
                 }
             }.navigationBarTitle("Articles")
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
