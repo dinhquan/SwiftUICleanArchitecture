@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Network
 
 final class ArticleListViewModel: ObservableObject {
     @Injected var articleService: ArticleService

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import struct Network.Article
 
 struct ArticleListRow: View {
     @State var article: Article

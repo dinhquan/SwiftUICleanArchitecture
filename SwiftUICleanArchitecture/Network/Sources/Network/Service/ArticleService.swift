@@ -8,11 +8,11 @@
 import Foundation
 
 struct SearchArticleResult: Decodable {
-    @Default.EmptyList var articles: [Article]
+    @Default.Empty var articles: [Article]
     @Default.Zero var totalResults: Int
 }
 
-protocol ArticleService {
+public protocol ArticleService {
     func searchArticlesByKeyword(_ keyword: String, page: Int) async throws -> [Article]
 }
 

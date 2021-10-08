@@ -15,11 +15,3 @@ struct SwiftUICleanArchitectureApp: App {
         }
     }
 }
-
-extension Resolver: ResolverRegistering {
-    public static func registerAllServices() {
-        register {
-            DefaultArticleService() as ArticleService
-        }
-    }
-}

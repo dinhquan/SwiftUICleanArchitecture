@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Network
 
 final class ArticleDetailViewModel: ObservableObject {
     @Published private(set) var article: Article

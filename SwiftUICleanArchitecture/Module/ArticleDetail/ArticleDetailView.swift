@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import struct Network.Article
 
 struct ArticleDetailView: View {
     @ObservedObject var viewModel: ArticleDetailViewModel
