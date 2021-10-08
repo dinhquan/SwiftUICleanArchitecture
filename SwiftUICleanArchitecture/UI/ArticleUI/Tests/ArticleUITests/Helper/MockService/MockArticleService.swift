@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import SwiftUICleanArchitecture
+import Network
 
 struct MockArticleService: ArticleService {
     func searchArticlesByKeyword(_ keyword: String, page: Int) async throws -> [Article] {

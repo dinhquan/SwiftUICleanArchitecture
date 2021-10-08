@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 import Network
 
 final class ArticleDetailViewModel: ObservableObject {

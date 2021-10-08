@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct SearchArticleResult: Decodable {
-    @Default.Empty var articles: [Article]
-    @Default.Zero var totalResults: Int
+public struct SearchArticleResult: Decodable {
+    @Default.Empty public var articles: [Article]
+    @Default.Zero public var totalResults: Int
 }
 
 public protocol ArticleService {

@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import SwiftUICleanArchitecture
+@testable import ArticleUI
 
 class ArticleListViewModelTests: XCTestCase {
     private typealias ViewModel = ArticleListViewModel
