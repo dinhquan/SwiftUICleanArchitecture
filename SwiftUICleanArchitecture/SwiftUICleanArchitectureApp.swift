@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import ArticleUI
 
 @main
 struct SwiftUICleanArchitectureApp: App {
     var body: some Scene {
         WindowGroup {
-            ArticleListView(viewModel: .init())
+            ArticleUI.ListView()
         }
     }
 }
