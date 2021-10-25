@@ -19,7 +19,6 @@
 		140E7F73270D843100AA0D36 /* ArticleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F66270D843100AA0D36 /* ArticleListViewModel.swift */; };
 		140E7F74270D843100AA0D36 /* ArticleListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F67270D843100AA0D36 /* ArticleListView.swift */; };
 		140E7F75270D843100AA0D36 /* searchArticles.json in Resources */ = {isa = PBXBuildFile; fileRef = 140E7F6A270D843100AA0D36 /* searchArticles.json */; };
-		140E7F76270D843100AA0D36 /* Networker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F6B270D843100AA0D36 /* Networker.swift */; };
 		140E7F77270D843100AA0D36 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F6C270D843100AA0D36 /* NetworkConfig.swift */; };
 		140E7F78270D843100AA0D36 /* ArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F6E270D843100AA0D36 /* ArticleService.swift */; };
 		140E7F7B270D8DB800AA0D36 /* ArticleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F7A270D8DB800AA0D36 /* ArticleAPI.swift */; };
@@ -31,6 +30,7 @@
 		140E7F8D270DB17900AA0D36 /* ArticleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F8C270DB17900AA0D36 /* ArticleTests.swift */; };
 		140E7F90270ED71A00AA0D36 /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F8F270ED71A00AA0D36 /* ArticleDetailView.swift */; };
 		140E7F92270ED72F00AA0D36 /* ArticleDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F91270ED72F00AA0D36 /* ArticleDetailViewModel.swift */; };
+		147C14AC272697A400991D88 /* Swinet in Frameworks */ = {isa = PBXBuildFile; productRef = 147C14AB272697A400991D88 /* Swinet */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,7 +66,6 @@
 		140E7F66270D843100AA0D36 /* ArticleListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleListViewModel.swift; sourceTree = "<group>"; };
 		140E7F67270D843100AA0D36 /* ArticleListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleListView.swift; sourceTree = "<group>"; };
 		140E7F6A270D843100AA0D36 /* searchArticles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = searchArticles.json; sourceTree = "<group>"; };
-		140E7F6B270D843100AA0D36 /* Networker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Networker.swift; sourceTree = "<group>"; };
 		140E7F6C270D843100AA0D36 /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		140E7F6E270D843100AA0D36 /* ArticleService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleService.swift; sourceTree = "<group>"; };
 		140E7F79270D850600AA0D36 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -86,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				147C14AC272697A400991D88 /* Swinet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,7 +181,6 @@
 			isa = PBXGroup;
 			children = (
 				140E7F60270D843100AA0D36 /* CodableDefault.swift */,
-				140E7F6B270D843100AA0D36 /* Networker.swift */,
 				140E7F61270D843100AA0D36 /* Resolver.swift */,
 			);
 			path = Common;
@@ -316,6 +315,9 @@
 			dependencies = (
 			);
 			name = SwiftUICleanArchitecture;
+			packageProductDependencies = (
+				147C14AB272697A400991D88 /* Swinet */,
+			);
 			productName = SwiftUICleanArchitecture;
 			productReference = 140E7F30270D815300AA0D36 /* SwiftUICleanArchitecture.app */;
 			productType = "com.apple.product-type.application";
@@ -388,6 +390,9 @@
 				Base,
 			);
 			mainGroup = 140E7F27270D815300AA0D36;
+			packageReferences = (
+				147C14AA272697A400991D88 /* XCRemoteSwiftPackageReference "Swinet" */,
+			);
 			productRefGroup = 140E7F31270D815300AA0D36 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -438,7 +443,6 @@
 				140E7F74270D843100AA0D36 /* ArticleListView.swift in Sources */,
 				140E7F92270ED72F00AA0D36 /* ArticleDetailViewModel.swift in Sources */,
 				140E7F70270D843100AA0D36 /* CodableDefault.swift in Sources */,
-				140E7F76270D843100AA0D36 /* Networker.swift in Sources */,
 				140E7F6F270D843100AA0D36 /* Article.swift in Sources */,
 				140E7F77270D843100AA0D36 /* NetworkConfig.swift in Sources */,
 				140E7F7B270D8DB800AA0D36 /* ArticleAPI.swift in Sources */,
@@ -795,6 +799,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		147C14AA272697A400991D88 /* XCRemoteSwiftPackageReference "Swinet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dinhquan/Swinet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		147C14AB272697A400991D88 /* Swinet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 147C14AA272697A400991D88 /* XCRemoteSwiftPackageReference "Swinet" */;
+			productName = Swinet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 140E7F28270D815300AA0D36 /* Project object */;
 }

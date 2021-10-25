@@ -7,10 +7,11 @@
 
 import Foundation
 import SwiftUI
+import Swinet
 
 protocol RestAPI {
     var path: String { get }
-    var method: Networker.HttpMethod { get }
+    var method: Swinet.HttpMethod { get }
     var headers: [String: String] { get }
     var parameters: [String: String]? { get }
     var body: [String: Any]? { get }
@@ -23,7 +24,7 @@ extension RestAPI {
     var headers: [String: String] {
         ["Content-Type": "application/json"]
     }
-    var method: Networker.HttpMethod { .get }
+    var method: Swinet.HttpMethod { .get }
     var parameters: [String: String]? { nil }
     var body: [String: Any]? { nil }
     var mockFile: String? { nil }
@@ -43,7 +44,7 @@ extension RestAPI {
         }
 
         let url = "\(NetworkConfig.current.baseUrl)/\(path)"
-        return try await Networker.request(url,
+        return try await Swinet.request(url,
                                  method: method,
                                  parameters: parameters,
                                  body: body,

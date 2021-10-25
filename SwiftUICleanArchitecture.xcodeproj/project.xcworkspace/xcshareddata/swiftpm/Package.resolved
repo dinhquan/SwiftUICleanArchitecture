@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Swinet",
+        "repositoryURL": "https://github.com/dinhquan/Swinet",
+        "state": {
+          "branch": null,
+          "revision": "dc9c79bdcc9478d74b49aaf2020645d0f8bac235",
+          "version": "1.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
