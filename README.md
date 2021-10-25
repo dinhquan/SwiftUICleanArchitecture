@@ -1,98 +1,69 @@
 # SwiftUICleanArchitecture
-iOS Clean Architecture with SwiftUI, Combine, MVVM
+iOS Clean Architecture with SwiftUI, Swift Concurrency with MVVM pattern.
 
 ## High level overview
 
-![alt text](https://github.com/dinhquan/iOSCleanArchitecture/blob/main/Images/HighLevel.png)
+![alt text](https://github.com/dinhquan/SwiftUICleanArchitecture/blob/main/Images/Architecture.png)
 
-The whole design architecture is separated into 4 rings:
-- **Entities**: Enterprise business rules
-- **UseCases**: Application business rules
-- **Data**: Network & Data persistent
-- **Application**: UI & Devices
-
-The most important rule is that the inner ring knows nothing about outer ring. Which means the variables, functions and classes (any entities) that exist in the outer layers can not be mentioned in the more inward levels.
+The whole design architecture is separated into 5 parts in horizontal axis:
+- **View**: UI layer, doesn't contain any business logic
+- **ViewModel**: UI Logic layer.
+- **Service**: Middle layer between ViewModel and Data Layer.
+- **Data Layer**: Database, Networking, User Preferences, Analytics, ... or any third party services
+- **Model**: Model is shared layer. Model can be accessed from any where.
 
 ## Detail overview
 
-![alt text](https://github.com/dinhquan/iOSCleanArchitecture/blob/main/Images/DetailLevel.png)
-
-### Domain
-**Entities** are implemented as Swift struct
+### Model
+**Model** are implemented as Swift struct
 ```swift
 struct Article: Decodable {
-    @Default.Empty var author: String
-    @Default.Empty var title: String
-    @Default.Empty var description: String
-    @Default.Empty var url: String
-    @Default.Empty var urlToImage: String
-    @Default.Empty var publishedAt: String
-    @Default.Empty var content: String
+    var author: String
+    var title: String
+    var description: String
+    var url: String
+    var urlToImage: String
+    var publishedAt: String
+    var content: String
 }
 ```
-
-**UseCases** are protocols
+### Service
+Each **Service** includes a protocol and a default implementation.
 ```swift
-protocol ArticleUseCase {
-    func findArticlesByKeyword(_ keyword: String, pageSize: Int, page: Int) -> AnyPublisher<[Article], Error>
+protocol ArticleService {
+    func searchArticlesByKeyword(_ keyword: String, page: Int) async throws -> [Article]
 }
 
-```
-
-Domain layer doesn't depend on UIKit or any 3rd party framework.
-
-### Data
-**Repositories** are concrete implementation of UseCases
-```swift
-struct SearchArticleResult: Decodable {
-    @Default.EmptyList var articles: [Article]
-    @Default.Zero var totalResults: Int
-}
-
-struct ArticleRepository: ArticleUseCase {
-    func findArticlesByKeyword(_ keyword: String, pageSize: Int, page: Int) -> AnyPublisher<[Article], Error> {
-        return ArticleService
-            .searchArticlesByKeyword(q: keyword, pageSize: pageSize, page: page)
-            .request(returnType: SearchArticleResult.self)
-            .map(\.articles)
-            .eraseToAnyPublisher()
+actor DefaultArticleService: ArticleService {
+    func searchArticlesByKeyword(_ keyword: String, page: Int) async throws -> [Article] {
+        return try await ArticleAPI
+            .searchArticles(keyword: keyword, page: page)
+            .call([Article].self)
     }
 }
 ```
 
-### Application
-Application is implemented with the MVVM pattern. The **ViewModel** performs pure transformation of a user Input to the Output
+### ViewModel
+The **ViewModel** performs pure transformation of a user Input to the Output
 ```swift
 final class ArticleListViewModel: ObservableObject {
-    @Injected var articleUseCase: ArticleUseCase
-    
-    private var disposables = Set<AnyCancellable>()
-    
-    /// Mark: Input
-    let onAppear = PassthroughSubject<Void, Never>()
-    
-    /// Mark: Output
+    @Injected var articleService: ArticleService
+
     @Published private(set) var articles: [Article] = []
-    
-    init() {
-        transform()
-    }
-    
-    private func transform() {
-        onAppear
-            .flatMap {
-                return self.articleUseCase
-                    .findArticlesByKeyword("Tesla", pageSize: 20, page: 1)
-                    .replaceError(with: [])
-            }
-            .eraseToAnyPublisher()
-            .assign(to: \ArticleListViewModel.articles, on: self)
-            .store(in: &disposables)
+    @Published private(set) var isFetching = false
+
+    @MainActor
+    func fetchArticles() async throws {
+        isFetching = true
+        defer { isFetching = false }
+
+        articles = try await articleService.searchArticlesByKeyword("Tesla", page: 1)
     }
 }
 ```
-As you can see, `articleUseCase` is injected to ViewModel by `@Injected` annotation. Thanks to [Resolver](https://github.com/hmlongco/Resolver) library to make dependency injection easier.
+As you can see, `articleService` is injected to ViewModel by `@Injected` annotation. Thanks to [Resolver](https://github.com/hmlongco/Resolver) library to make dependency injection easier.
 
+### View
 The **View** only sends input and observe the output state to update UI
 ```swift
 struct ArticleListView: View {
@@ -100,13 +71,20 @@ struct ArticleListView: View {
     
     var body: some View {
         NavigationView {
-            List(viewModel.articles) { article in
-                ArticleListRow(article: article)
+            VStack {
+                List(viewModel.articles) { article in
+                    ArticleListRow(article: article)
+                }
+                if viewModel.isFetching {
+                    ProgressView()
+                }
+                Button("Load Articles") {
+                    Task {
+                        try? await viewModel.fetchArticles()
+                    }
+                }
             }
         }
-        .onAppear(perform: {
-            self.viewModel.onAppear.send()
-        })
     }
 }
 ```
@@ -114,4 +92,4 @@ struct ArticleListView: View {
 ## Code generator
 The clean architecture, MVVM or VIPER will create a lot of files when you start a new module. So using a code generator is the smart way to save time.
 
-[codegen](https://github.com/dinhquan/codegen) is a great tool to do it.
+[codegen](https://github.com/dinhquan/codegen) is a great tool for code generator.
