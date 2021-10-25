@@ -19,12 +19,9 @@ struct ArticleListView: View {
                 Group {
                     TextField("Input a keyword", text: $searchText, onCommit: {
                             viewModel.searchArticles(keyword: searchText)
-                        }).introspectTextField { textField in
-                            textField.returnKeyType = .done
-                        }
+                        })
                         .textFieldStyle(.roundedBorder)
-                        .padding(.horizontal, 20)
-                        .padding(.top, 10)
+                        .padding(.init(top: 10, leading: 20, bottom: 0, trailing: 20))
                 }
                 List {
                     ForEach(viewModel.articles) { article in
@@ -48,7 +45,7 @@ struct ArticleListView: View {
                 }
                 .listStyle(PlainListStyle())
             }.navigationBarTitle("Articles")
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

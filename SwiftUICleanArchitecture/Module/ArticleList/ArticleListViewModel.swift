@@ -8,7 +8,17 @@
 import Foundation
 import Combine
 
-final class ArticleListViewModel: ObservableObject {
+private protocol Input {
+    func searchArticles(keyword: String)
+    func loadMore()
+}
+
+private protocol Output {
+    var articles: [Article] { get }
+    var isFetching: Bool { get }
+}
+
+final class ArticleListViewModel: ObservableObject, Input, Output {
     @Injected var articleService: ArticleService
 
     @Published private(set) var articles: [Article] = []
@@ -29,7 +39,7 @@ final class ArticleListViewModel: ObservableObject {
         fetchArticles()
     }
 
-    func fetchArticles() {
+    private func fetchArticles() {
         isFetching = true
         articleService.searchArticlesByKeyword(keyword, page: currentPage)
             .replaceError(with: [])

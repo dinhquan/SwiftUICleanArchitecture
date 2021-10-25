@@ -31,7 +31,6 @@
 		140E7F90270ED71A00AA0D36 /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F8F270ED71A00AA0D36 /* ArticleDetailView.swift */; };
 		140E7F92270ED72F00AA0D36 /* ArticleDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F91270ED72F00AA0D36 /* ArticleDetailViewModel.swift */; };
 		147C14AC272697A400991D88 /* Swinet in Frameworks */ = {isa = PBXBuildFile; productRef = 147C14AB272697A400991D88 /* Swinet */; };
-		147C14AF2726A57200991D88 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 147C14AE2726A57200991D88 /* Introspect */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,7 +86,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				147C14AC272697A400991D88 /* Swinet in Frameworks */,
-				147C14AF2726A57200991D88 /* Introspect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -319,7 +317,6 @@
 			name = SwiftUICleanArchitecture;
 			packageProductDependencies = (
 				147C14AB272697A400991D88 /* Swinet */,
-				147C14AE2726A57200991D88 /* Introspect */,
 			);
 			productName = SwiftUICleanArchitecture;
 			productReference = 140E7F30270D815300AA0D36 /* SwiftUICleanArchitecture.app */;
@@ -395,7 +392,6 @@
 			mainGroup = 140E7F27270D815300AA0D36;
 			packageReferences = (
 				147C14AA272697A400991D88 /* XCRemoteSwiftPackageReference "Swinet" */,
-				147C14AD2726A57200991D88 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 140E7F31270D815300AA0D36 /* Products */;
 			projectDirPath = "";
@@ -813,14 +809,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		147C14AD2726A57200991D88 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.3;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -828,11 +816,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 147C14AA272697A400991D88 /* XCRemoteSwiftPackageReference "Swinet" */;
 			productName = Swinet;
-		};
-		147C14AE2726A57200991D88 /* Introspect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 147C14AD2726A57200991D88 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
