@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 final class ArticleListViewModel: ObservableObject {
     @Injected var articleService: ArticleService
@@ -13,11 +14,17 @@ final class ArticleListViewModel: ObservableObject {
     @Published private(set) var articles: [Article] = []
     @Published private(set) var isFetching = false
 
-    @MainActor
-    func fetchArticles() async throws {
-        isFetching = true
-        defer { isFetching = false }
+    private var disposables = Set<AnyCancellable>()
 
-        articles = try await articleService.searchArticlesByKeyword("Tesla", page: 1)
+    func fetchArticles() {
+        isFetching = true
+
+        articleService.searchArticlesByKeyword("Tesla", page: 1)
+            .replaceError(with: [])
+            .handleEvents(receiveCompletion: { [weak self] _ in
+                self?.isFetching = false
+            })
+            .assign(to: \ArticleListViewModel.articles, on: self)
+            .store(in: &disposables)
     }
 }

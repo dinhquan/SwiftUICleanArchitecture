@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import SwiftUI
 import Swinet
+import Combine
 
 protocol RestAPI {
     var path: String { get }
@@ -17,7 +17,7 @@ protocol RestAPI {
     var body: [String: Any]? { get }
     var mockFile: String? { get }
 
-    func call<T: Decodable>(_ type: T.Type) async throws -> T
+    func call<T: Decodable>(_ type: T.Type) -> AnyPublisher<T, Error>
 }
 
 extension RestAPI {
@@ -29,26 +29,28 @@ extension RestAPI {
     var body: [String: Any]? { nil }
     var mockFile: String? { nil }
 
-    func call<T: Decodable>(_ type: T.Type) async throws -> T {
+    func call<T: Decodable>(_ type: T.Type) -> AnyPublisher<T, Error> {
         if let mockFile = mockFile,
            NetworkConfig.current.isEnabledNetworkMock,
             let path = Bundle.main.path(forResource: mockFile, ofType: ""),
             let data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
-            let decoder = JSONDecoder()
             do {
+                let decoder = JSONDecoder()
                 let value = try decoder.decode(type, from: data)
-                return value
+                return Just(value)
+                    .mapError { _ in Swinet.NetworkError.unknown }
+                    .eraseToAnyPublisher()
             } catch {
-                throw(error)
+                return Fail(error: error).eraseToAnyPublisher()
             }
         }
 
         let url = "\(NetworkConfig.current.baseUrl)/\(path)"
-        return try await Swinet.request(url,
+        return Swinet.request(url,
                                  method: method,
                                  parameters: parameters,
                                  body: body,
                                  headers: headers)
-            .responseDecodable(type)
+            .publishDecodable(type)
     }
 }

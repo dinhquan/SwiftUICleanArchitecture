@@ -22,9 +22,7 @@ struct ArticleListView: View {
                     ProgressView()
                 }
                 Button("Load Articles") {
-                    Task {
-                        try? await viewModel.fetchArticles()
-                    }
+                    viewModel.fetchArticles()
                 }
             }.navigationBarTitle("Articles")
         }

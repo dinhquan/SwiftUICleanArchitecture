@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 struct SearchArticleResult: Decodable {
     @Default.EmptyList var articles: [Article]
@@ -13,14 +14,15 @@ struct SearchArticleResult: Decodable {
 }
 
 protocol ArticleService {
-    func searchArticlesByKeyword(_ keyword: String, page: Int) async throws -> [Article]
+    func searchArticlesByKeyword(_ keyword: String, page: Int) -> AnyPublisher<[Article], Error>
 }
 
-actor DefaultArticleService: ArticleService {
-    func searchArticlesByKeyword(_ keyword: String, page: Int) async throws -> [Article] {
-        return try await ArticleAPI
+struct DefaultArticleService: ArticleService {
+    func searchArticlesByKeyword(_ keyword: String, page: Int) -> AnyPublisher<[Article], Error> {
+        return ArticleAPI
             .searchArticles(keyword: keyword, page: page)
             .call(SearchArticleResult.self)
-            .articles
+            .map(\.articles)
+            .eraseToAnyPublisher()
     }
 }
