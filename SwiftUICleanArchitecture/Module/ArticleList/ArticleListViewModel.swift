@@ -14,17 +14,29 @@ final class ArticleListViewModel: ObservableObject {
     @Published private(set) var articles: [Article] = []
     @Published private(set) var isFetching = false
 
+    private var currentPage = 1
+    private var keyword = ""
     private var disposables = Set<AnyCancellable>()
+
+    func searchArticles(keyword: String) {
+        currentPage = 1
+        self.keyword = keyword
+        fetchArticles()
+    }
+
+    func loadMore() {
+        currentPage += 1
+        fetchArticles()
+    }
 
     func fetchArticles() {
         isFetching = true
-
-        articleService.searchArticlesByKeyword("Tesla", page: 1)
+        articleService.searchArticlesByKeyword(keyword, page: currentPage)
             .replaceError(with: [])
-            .handleEvents(receiveCompletion: { [weak self] _ in
+            .sink(receiveValue: { [weak self] articles in
+                self?.articles.append(contentsOf: articles)
                 self?.isFetching = false
             })
-            .assign(to: \ArticleListViewModel.articles, on: self)
             .store(in: &disposables)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Article: Decodable {
+struct Article: Decodable, Equatable {
     @Default.Empty var author: String
     @Default.Empty var title: String
     @Default.Empty var description: String
