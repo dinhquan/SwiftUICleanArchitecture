@@ -89,6 +89,38 @@ struct ArticleListView: View {
 }
 ```
 
+## Testing
+In order to write fast, reliable unit test, we need to mock the **Service** (to avoid ViewModel interacting with Data Layer).
+```swift
+struct MockArticleService: ArticleService {
+    func searchArticlesByKeyword(_ keyword: String, page: Int) async throws -> [Article] {
+        MockLoader.load("searchArticles.json", ofType: SearchArticleResult.self)!.articles
+    }
+}
+```
+
+Then inject mock service into **ViewModel** for testing the view model.
+```swift
+class ArticleListViewModelTests: XCTestCase {
+    private typealias ViewModel = ArticleListViewModel
+
+    private var viewModel: ViewModel = .init()
+
+    override func setUpWithError() throws {
+        viewModel.articleService = MockArticleService()
+    }
+
+    override func tearDownWithError() throws {}
+
+    func testFetchArticles_whenSuccess() async {
+        try? await viewModel.fetchArticles()
+
+        XCTAssertFalse(viewModel.isFetching)
+        XCTAssertEqual(viewModel.articles.count, 20)
+    }
+}
+```
+
 ## Code generator
 The clean architecture, MVVM or VIPER will create a lot of files when you start a new module. So using a code generator is the smart way to save time.
 
