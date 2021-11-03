@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct SwiftUICleanArchitectureApp: App {
+    let store = AppStore(initial: AppState(), reducer: appReducer, middlewares: [appMiddleware])
+    
     var body: some Scene {
         WindowGroup {
-            ArticleListView(viewModel: .init())
+            ArticleListView()
+                .environmentObject(store)
         }
     }
 }

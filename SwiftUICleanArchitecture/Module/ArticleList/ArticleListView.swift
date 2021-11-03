@@ -7,10 +7,10 @@
 
 import SwiftUI
 import Introspect
+import Combine
 
 struct ArticleListView: View {
-    @ObservedObject var viewModel: ArticleListViewModel
-
+    @EnvironmentObject var store: AppStore
     @State private var searchText = ""
     
     var body: some View {
@@ -18,30 +18,25 @@ struct ArticleListView: View {
             VStack {
                 Group {
                     TextField("Input a keyword", text: $searchText, onCommit: {
-                            viewModel.searchArticles(keyword: searchText)
+                            store.dispatch(.fetchArticle(keyword: searchText, page: 1))
                         })
                         .textFieldStyle(.roundedBorder)
                         .padding(.init(top: 10, leading: 20, bottom: 0, trailing: 20))
                 }
                 List {
-                    ForEach(viewModel.articles) { article in
+                    ForEach(store.state.articles) { article in
                         NavigationLink(destination: ArticleDetailView(viewModel: ArticleDetailViewModel(article: article))) {
                             ArticleListRow(article: article)
-                                .onAppear {
-                                    if article == viewModel.articles.last {
-                                        viewModel.loadMore()
-                                    }
-                                }
                         }
                     }
-                    if viewModel.isFetching {
-                        VStack(alignment: .center) {
-                            HStack {
-                                Spacer()
-                            }
-                            ProgressView()
-                        }
-                    }
+//                    if viewModel.isFetching {
+//                        VStack(alignment: .center) {
+//                            HStack {
+//                                Spacer()
+//                            }
+//                            ProgressView()
+//                        }
+//                    }
                 }
                 .listStyle(PlainListStyle())
             }.navigationBarTitle("Articles")
@@ -49,8 +44,8 @@ struct ArticleListView: View {
     }
 }
 
-struct ArticleListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ArticleListView(viewModel: .init())
-    }
-}
+//struct ArticleListView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ArticleListView(viewModel: .init())
+//    }
+//}

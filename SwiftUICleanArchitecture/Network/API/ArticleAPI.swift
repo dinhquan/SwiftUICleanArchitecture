@@ -33,5 +33,5 @@ extension ArticleAPI {
         }
     }
 
-//    var mockFile: String? { "searchArticles.json" }
+    var mockFile: String? { "searchArticles.json" }
 }
