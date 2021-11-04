@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct SwiftUICleanArchitectureApp: App {
-    let store = AppStore(initial: AppState(), reducer: appReducer, middlewares: [appMiddleware])
+    let store = createStore()
     
     var body: some Scene {
         WindowGroup {
