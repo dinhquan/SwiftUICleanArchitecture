@@ -13,9 +13,7 @@ struct AppState {
 }
 
 enum AppAction {
-    case fetchArticle(keyword: String, page: Int)
-    case fetchArticleSuccess(articles: [Article])
-    case fetchArticleFailure(error: Error)
+    case article(ArticleAction)
 }
 
 typealias AppStore = Store<AppState, AppAction>

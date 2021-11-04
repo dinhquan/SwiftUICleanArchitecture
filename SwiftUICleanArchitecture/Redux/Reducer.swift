@@ -8,9 +8,16 @@
 import Foundation
 import Combine
 
+enum ArticleAction {
+    case fetchArticle(keyword: String, page: Int)
+    case fetchArticleSuccess(articles: [Article])
+    case fetchArticleFailure(error: Error)
+}
+
 let articleReducer: Reducer<AppState, AppAction> = { state, action in
+    guard case let .article(articleAction) = action else { return state }
     var newState = state
-    switch action {
+    switch articleAction {
     case .fetchArticleSuccess(let articles):
         newState.articles = articles
     default: ()
@@ -20,11 +27,11 @@ let articleReducer: Reducer<AppState, AppAction> = { state, action in
 
 let articleMiddleware: Middleware<AppState, AppAction> = { state, action in
     switch action {
-    case .fetchArticle(let keyword, let page):
+    case .article(.fetchArticle(let keyword, let page)):
         let service: ArticleService = DefaultArticleService()
         return service.searchArticlesByKeyword(keyword, page: page)
-            .map { AppAction.fetchArticleSuccess(articles: $0) }
-            .catch { Just(AppAction.fetchArticleFailure(error: $0)).eraseToAnyPublisher() }
+            .map { .article(.fetchArticleSuccess(articles: $0)) }
+            .catch { Just(.article(.fetchArticleFailure(error: $0))).eraseToAnyPublisher() }
             .eraseToAnyPublisher()
     default: ()
     }
