@@ -14,6 +14,24 @@ enum ArticleAction {
     case fetchArticleFailure(error: Error)
 }
 
+func fetchArticle(keyword: String, page: Int) -> Thunk<AppState, AppAction> {
+    return { dispatch, getState in
+        var cancellable = Set<AnyCancellable>()
+        let service: ArticleService = DefaultArticleService()
+        service.searchArticlesByKeyword(keyword, page: page)
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    dispatch(.article(.fetchArticleFailure(error: error)))
+                default: ()
+                }
+            } receiveValue: { articles in
+                dispatch(.article(.fetchArticleSuccess(articles: articles)))
+            }
+            .store(in: &cancellable)
+    }
+}
+
 let articleReducer: Reducer<AppState, AppAction> = { state, action in
     guard case let .article(articleAction) = action else { return state }
     var newState = state

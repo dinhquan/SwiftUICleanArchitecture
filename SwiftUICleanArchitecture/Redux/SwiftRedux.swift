@@ -12,6 +12,8 @@ typealias Reducer<State, Action> = (State, Action) -> State
 
 typealias Middleware<State, Action> = (State, Action) -> AnyPublisher<Action, Never>
 
+typealias Thunk<State, Action> = (_ dispatch: @escaping (Action) -> Void, _ getState: () -> State?) -> Void
+
 class Store<State, Action>: ObservableObject {
     @Published private(set) var state: State
 
@@ -34,6 +36,17 @@ class Store<State, Action>: ObservableObject {
         queue.sync {
             self.dispatch(self.state, action)
         }
+    }
+
+    func dispatch(_ thunk: Thunk<State, Action>) {
+        let dispatch = { (action: Action) in
+            let newState = self.reducer(self.state, action)
+            self.state = newState
+        }
+        let getState = {
+            return self.state
+        }
+        thunk(dispatch, getState)
     }
 
     private func dispatch(_ currentState: State, _ action: Action) {
