@@ -73,3 +73,10 @@ func combineReducers<State, Action>(_ reducers: Reducer<State, Action>...) -> Re
         return newState
     }
 }
+
+func combineMiddlewares<State, Action>(_ middlewares: Middleware<State, Action>...) -> Middleware<State, Action> {
+    return { state, action in
+        let publishers = middlewares.map { $0(state, action) }
+        return Publishers.MergeMany(publishers).eraseToAnyPublisher()
+    }
+}

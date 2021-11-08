@@ -32,7 +32,6 @@
 		140E7F90270ED71A00AA0D36 /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F8F270ED71A00AA0D36 /* ArticleDetailView.swift */; };
 		140E7F92270ED72F00AA0D36 /* ArticleDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F91270ED72F00AA0D36 /* ArticleDetailViewModel.swift */; };
 		147C14AC272697A400991D88 /* Swinet in Frameworks */ = {isa = PBXBuildFile; productRef = 147C14AB272697A400991D88 /* Swinet */; };
-		148731D627338D0900716C67 /* Slice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148731D527338D0900716C67 /* Slice.swift */; };
 		148731D82733D43800716C67 /* SwiftRedux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148731D72733D43800716C67 /* SwiftRedux.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,7 +81,6 @@
 		140E7F8C270DB17900AA0D36 /* ArticleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTests.swift; sourceTree = "<group>"; };
 		140E7F8F270ED71A00AA0D36 /* ArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailView.swift; sourceTree = "<group>"; };
 		140E7F91270ED72F00AA0D36 /* ArticleDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewModel.swift; sourceTree = "<group>"; };
-		148731D527338D0900716C67 /* Slice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Slice.swift; sourceTree = "<group>"; };
 		148731D72733D43800716C67 /* SwiftRedux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRedux.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,7 +116,6 @@
 				148731D72733D43800716C67 /* SwiftRedux.swift */,
 				14052AF9273272E900726496 /* Store.swift */,
 				14052AF8273272E900726496 /* Reducer.swift */,
-				148731D527338D0900716C67 /* Slice.swift */,
 			);
 			path = Redux;
 			sourceTree = "<group>";
@@ -465,7 +462,6 @@
 				140E7F70270D843100AA0D36 /* CodableDefault.swift in Sources */,
 				140E7F6F270D843100AA0D36 /* Article.swift in Sources */,
 				140E7F77270D843100AA0D36 /* NetworkConfig.swift in Sources */,
-				148731D627338D0900716C67 /* Slice.swift in Sources */,
 				140E7F7B270D8DB800AA0D36 /* ArticleAPI.swift in Sources */,
 				140E7F72270D843100AA0D36 /* ArticleListRow.swift in Sources */,
 				140E7F78270D843100AA0D36 /* ArticleService.swift in Sources */,
