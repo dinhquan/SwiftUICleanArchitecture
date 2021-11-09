@@ -43,7 +43,7 @@ let articleReducer: Reducer<AppState, AppAction> = { state, action in
     return newState
 }
 
-let articleMiddleware: Middleware<AppState, AppAction> = { state, action in
+let articleEpic: Epic<AppState, AppAction> = { state, action in
     switch action {
     case .article(.fetchArticle(let keyword, let page)):
         let service: ArticleService = DefaultArticleService()

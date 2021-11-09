@@ -19,13 +19,15 @@ enum AppAction {
 typealias AppStore = Store<AppState, AppAction>
 
 let rootReducer = combineReducers(articleReducer)
-let rootMiddleware = combineMiddlewares(articleMiddleware)
 
 func createStore() -> AppStore {
     let store = AppStore(
         initial: AppState(),
         reducer: rootReducer,
-        middlewares: [rootMiddleware]
+        middlewares: [
+            EpicMiddleware(epics: [articleEpic]),
+            ThunkMiddleware()
+        ]
     )
     return store
 }

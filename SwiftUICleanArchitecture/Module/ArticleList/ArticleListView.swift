@@ -17,8 +17,8 @@ struct ArticleListView: View {
             VStack {
                 Group {
                     TextField("Input a keyword", text: $searchText, onCommit: {
-//                        store.dispatch(fetchArticle(keyword: searchText, page: 1))
-                        store.dispatch(.article(.fetchArticle(keyword: searchText, page: 1)))
+                        store.dispatch(fetchArticle(keyword: searchText, page: 1))
+//                        store.dispatch(.article(.fetchArticle(keyword: searchText, page: 1)))
                         })
                         .textFieldStyle(.roundedBorder)
                         .padding(.init(top: 10, leading: 20, bottom: 0, trailing: 20))
