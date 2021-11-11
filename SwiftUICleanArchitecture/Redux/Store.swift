@@ -8,8 +8,14 @@
 import Foundation
 import Combine
 
+struct Response<Model> {
+    var value: Model
+    var isLoading = false
+    var error: Error? = nil
+}
+
 struct AppState {
-    var articles: [Article] = []
+    var articles: Response<[Article]> = .init(value: [])
 }
 
 enum AppAction {
@@ -22,13 +28,29 @@ struct Environment {
 
 typealias AppStore = Store<AppState, AppAction, Environment>
 
-let rootReducer = combineReducers(articleReducer)
+final class StoreContainer {
+    var store: AppStore? = nil
+    
+    static var shared = StoreContainer()
+    
+    func initializeStore() {
+        let rootReducer = combineReducers(articleReducer)
 
-func createStore() -> AppStore {
-    let store = AppStore(
-        initialState: AppState(),
-        reducer: rootReducer,
-        environment: Environment()
-    )
-    return store
+        self.store = AppStore(
+            initialState: AppState(),
+            reducer: rootReducer,
+            environment: Environment()
+        )
+    }
+}
+
+@propertyWrapper struct ReduxStore {
+    var wrappedValue: AppStore {
+        get {
+            guard let store = StoreContainer.shared.store else {
+                fatalError("Store is not created. Please create it first!")
+            }
+            return store
+        }
+    }
 }

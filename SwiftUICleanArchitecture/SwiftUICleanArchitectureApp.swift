@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct SwiftUICleanArchitectureApp: App {
-    let store = createStore()
+    init() {
+        StoreContainer.shared.initializeStore()
+    }
     
     var body: some Scene {
         WindowGroup {
-            ArticleListView()
-                .environmentObject(store)
+            ArticleListView(viewModel: .init())
         }
     }
 }

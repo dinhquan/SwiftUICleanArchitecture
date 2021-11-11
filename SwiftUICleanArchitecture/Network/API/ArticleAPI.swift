@@ -25,7 +25,7 @@ extension ArticleAPI {
             return [
                 "q": keyword.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed) ?? "",
                 "apiKey": NetworkConfig.current.apiKey,
-                "from": "2021-10-01",
+                "from": "2021-11-01",
                 "sortBy": "publishedAt",
                 "pageSize": "20",
                 "page": "\(page)"
@@ -33,5 +33,5 @@ extension ArticleAPI {
         }
     }
 
-    var mockFile: String? { "searchArticles.json" }
+//    var mockFile: String? { "searchArticles.json" }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 
 struct ArticleListView: View {
-    @EnvironmentObject var store: AppStore
+    @ObservedObject var viewModel: ArticleListViewModel
     @State private var searchText = ""
     
     var body: some View {
@@ -17,25 +17,25 @@ struct ArticleListView: View {
             VStack {
                 Group {
                     TextField("Input a keyword", text: $searchText, onCommit: {
-                        store.dispatch(.article(.fetchArticle(keyword: searchText, page: 1)))
+                        viewModel.searchArticles(keyword: searchText)
                         })
                         .textFieldStyle(.roundedBorder)
                         .padding(.init(top: 10, leading: 20, bottom: 0, trailing: 20))
                 }
                 List {
-                    ForEach(store.state.articles) { article in
+                    if viewModel.isLoading {
+                        VStack(alignment: .center) {
+                            HStack {
+                                Spacer()
+                            }
+                            ProgressView()
+                        }
+                    }
+                    ForEach(viewModel.articles) { article in
                         NavigationLink(destination: ArticleDetailView(viewModel: ArticleDetailViewModel(article: article))) {
                             ArticleListRow(article: article)
                         }
                     }
-//                    if viewModel.isFetching {
-//                        VStack(alignment: .center) {
-//                            HStack {
-//                                Spacer()
-//                            }
-//                            ProgressView()
-//                        }
-//                    }
                 }
                 .listStyle(PlainListStyle())
             }.navigationBarTitle("Articles")
@@ -43,8 +43,8 @@ struct ArticleListView: View {
     }
 }
 
-//struct ArticleListView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ArticleListView(viewModel: .init())
-//    }
-//}
+struct ArticleListView_Previews: PreviewProvider {
+    static var previews: some View {
+        ArticleListView(viewModel: .init())
+    }
+}

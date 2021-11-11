@@ -7,12 +7,11 @@
 
 import Foundation
 import Combine
-import SwiftUI
 
 typealias Reducer<State, Action, Environment> =
     (inout State, Action, Environment) -> AnyPublisher<Action, Never>?
 
-class Store<State, Action, Environment>: ObservableObject {
+final class Store<State, Action, Environment>: ObservableObject {
     @Published private(set) var state: State
 
     private let environment: Environment

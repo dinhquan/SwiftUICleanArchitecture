@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		14052AFA273272E900726496 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14052AF8273272E900726496 /* Reducer.swift */; };
+		14052AFA273272E900726496 /* ArticleReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14052AF8273272E900726496 /* ArticleReducer.swift */; };
 		14052AFB273272E900726496 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14052AF9273272E900726496 /* Store.swift */; };
 		140E7F34270D815300AA0D36 /* SwiftUICleanArchitectureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F33270D815300AA0D36 /* SwiftUICleanArchitectureApp.swift */; };
 		140E7F38270D815600AA0D36 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140E7F37270D815600AA0D36 /* Assets.xcassets */; };
@@ -31,6 +31,7 @@
 		140E7F8D270DB17900AA0D36 /* ArticleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F8C270DB17900AA0D36 /* ArticleTests.swift */; };
 		140E7F90270ED71A00AA0D36 /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F8F270ED71A00AA0D36 /* ArticleDetailView.swift */; };
 		140E7F92270ED72F00AA0D36 /* ArticleDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140E7F91270ED72F00AA0D36 /* ArticleDetailViewModel.swift */; };
+		1424CB46273CEF8B009EC6DC /* ArticleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1424CB45273CEF8B009EC6DC /* ArticleListViewModel.swift */; };
 		147C14AC272697A400991D88 /* Swinet in Frameworks */ = {isa = PBXBuildFile; productRef = 147C14AB272697A400991D88 /* Swinet */; };
 		148731D82733D43800716C67 /* SwiftRedux.swift in Sources */ = {isa = PBXBuildFile; fileRef = 148731D72733D43800716C67 /* SwiftRedux.swift */; };
 /* End PBXBuildFile section */
@@ -53,7 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		14052AF8273272E900726496 /* Reducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
+		14052AF8273272E900726496 /* ArticleReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleReducer.swift; sourceTree = "<group>"; };
 		14052AF9273272E900726496 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		140E7F30270D815300AA0D36 /* SwiftUICleanArchitecture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUICleanArchitecture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		140E7F33270D815300AA0D36 /* SwiftUICleanArchitectureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUICleanArchitectureApp.swift; sourceTree = "<group>"; };
@@ -81,6 +82,7 @@
 		140E7F8C270DB17900AA0D36 /* ArticleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTests.swift; sourceTree = "<group>"; };
 		140E7F8F270ED71A00AA0D36 /* ArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailView.swift; sourceTree = "<group>"; };
 		140E7F91270ED72F00AA0D36 /* ArticleDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailViewModel.swift; sourceTree = "<group>"; };
+		1424CB45273CEF8B009EC6DC /* ArticleListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListViewModel.swift; sourceTree = "<group>"; };
 		148731D72733D43800716C67 /* SwiftRedux.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftRedux.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,9 +115,8 @@
 		14052AF7273272E900726496 /* Redux */ = {
 			isa = PBXGroup;
 			children = (
-				148731D72733D43800716C67 /* SwiftRedux.swift */,
 				14052AF9273272E900726496 /* Store.swift */,
-				14052AF8273272E900726496 /* Reducer.swift */,
+				14052AF8273272E900726496 /* ArticleReducer.swift */,
 			);
 			path = Redux;
 			sourceTree = "<group>";
@@ -143,11 +144,11 @@
 		140E7F32270D815300AA0D36 /* SwiftUICleanArchitecture */ = {
 			isa = PBXGroup;
 			children = (
-				14052AF7273272E900726496 /* Redux */,
 				140E7F5F270D843100AA0D36 /* Common */,
 				140E7F68270D843100AA0D36 /* Network */,
 				140E7F5D270D843100AA0D36 /* Model */,
 				140E7F6D270D843100AA0D36 /* Service */,
+				14052AF7273272E900726496 /* Redux */,
 				140E7F62270D843100AA0D36 /* Module */,
 				140E7F33270D815300AA0D36 /* SwiftUICleanArchitectureApp.swift */,
 				140E7F37270D815600AA0D36 /* Assets.xcassets */,
@@ -197,6 +198,7 @@
 			children = (
 				140E7F60270D843100AA0D36 /* CodableDefault.swift */,
 				140E7F61270D843100AA0D36 /* Resolver.swift */,
+				148731D72733D43800716C67 /* SwiftRedux.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -215,6 +217,7 @@
 			children = (
 				140E7F64270D843100AA0D36 /* View */,
 				140E7F67270D843100AA0D36 /* ArticleListView.swift */,
+				1424CB45273CEF8B009EC6DC /* ArticleListViewModel.swift */,
 			);
 			path = ArticleList;
 			sourceTree = "<group>";
@@ -452,12 +455,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				148731D82733D43800716C67 /* SwiftRedux.swift in Sources */,
+				1424CB46273CEF8B009EC6DC /* ArticleListViewModel.swift in Sources */,
 				14052AFB273272E900726496 /* Store.swift in Sources */,
 				140E7F71270D843100AA0D36 /* Resolver.swift in Sources */,
 				140E7F90270ED71A00AA0D36 /* ArticleDetailView.swift in Sources */,
 				140E7F34270D815300AA0D36 /* SwiftUICleanArchitectureApp.swift in Sources */,
 				140E7F74270D843100AA0D36 /* ArticleListView.swift in Sources */,
-				14052AFA273272E900726496 /* Reducer.swift in Sources */,
+				14052AFA273272E900726496 /* ArticleReducer.swift in Sources */,
 				140E7F92270ED72F00AA0D36 /* ArticleDetailViewModel.swift in Sources */,
 				140E7F70270D843100AA0D36 /* CodableDefault.swift in Sources */,
 				140E7F6F270D843100AA0D36 /* Article.swift in Sources */,
