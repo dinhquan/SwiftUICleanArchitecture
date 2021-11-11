@@ -7,100 +7,43 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
-protocol Middleware {}
+typealias Reducer<State, Action, Environment> =
+    (inout State, Action, Environment) -> AnyPublisher<Action, Never>?
 
-struct EpicMiddleware<State, Action>: Middleware {
-    let epics: [Epic<State, Action>]
-    
-    init(epics: [Epic<State, Action>]) {
-        self.epics = epics
-    }
-}
-
-struct ThunkMiddleware: Middleware {}
-
-struct LoggerMiddleware<State, Action>: Middleware {
-    
-}
-
-typealias Reducer<State, Action> = (State, Action) -> State
-
-typealias Epic<State, Action> = (State, Action) -> AnyPublisher<Action, Never>
-
-typealias Thunk<State, Action> = (_ dispatch: @escaping (Action) -> Void, _ getState: () -> State?) -> Void
-
-class Store<State, Action>: ObservableObject {
+class Store<State, Action, Environment>: ObservableObject {
     @Published private(set) var state: State
 
-    private let reducer: Reducer<State, Action>
-    private let middlewares: [Middleware]
-    private let queue = DispatchQueue(label: "com.dinhquan.swiftredux", qos: .userInitiated)
-    private var subscriptions: Set<AnyCancellable> = []
-    private let hasThunk: Bool
+    private let environment: Environment
+    private let reducer: Reducer<State, Action, Environment>
+    private var cancellables: Set<AnyCancellable> = []
     
     init(
-        initial: State,
-        reducer: @escaping Reducer<State, Action>,
-        middlewares: [Middleware] = []
+        initialState: State,
+        reducer: @escaping Reducer<State, Action, Environment>,
+        environment: Environment
     ) {
-        self.state = initial
+        self.state = initialState
         self.reducer = reducer
-        self.middlewares = middlewares
-        hasThunk = middlewares.contains(where: { $0 is ThunkMiddleware })
+        self.environment = environment
     }
 
     func dispatch(_ action: Action) {
-        queue.sync {
-            self.dispatch(self.state, action)
+        guard let effect = reducer(&state, action, environment) else {
+            return
         }
-    }
-
-    func dispatch(_ thunk: Thunk<State, Action>) {
-        guard hasThunk else { return }
-        
-        let dispatch = { (action: Action) in
-            let newState = self.reducer(self.state, action)
-            self.state = newState
-        }
-        let getState = {
-            return self.state
-        }
-        thunk(dispatch, getState)
-    }
-    
-    private func dispatch(_ currentState: State, _ action: Action) {
-        let newState = reducer(currentState, action)
-
-        middlewares.forEach { middleware in
-            if let mid = middleware as? EpicMiddleware<State, Action> {
-                mid.epics.forEach { epic in
-                    let publisher = epic(newState, action)
-                    publisher
-                        .receive(on: DispatchQueue.main)
-                        .sink(receiveValue: dispatch)
-                        .store(in: &subscriptions)
-                }
-            }
-        }
-
-        state = newState
+        effect
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: dispatch)
+            .store(in: &cancellables)
     }
 }
 
-func combineReducers<State, Action>(_ reducers: Reducer<State, Action>...) -> Reducer<State, Action> {
-    return { state, action in
-        var newState = state
-        reducers.forEach { reducer in
-            newState = reducer(state, action)
-        }
-        return newState
-    }
-}
-
-func combineEpics<State, Action>(_ epics: Epic<State, Action>...) -> Epic<State, Action> {
-    return { state, action in
-        let publishers = epics.map { $0(state, action) }
+func combineReducers<State, Action, Environment>(_ reducers: Reducer<State, Action, Environment>...) -> Reducer<State, Action, Environment> {
+    return { state, action, environment in
+        let publishers = reducers.map { $0(&state, action, environment) }
+            .compactMap { $0 }
         return Publishers.MergeMany(publishers).eraseToAnyPublisher()
     }
 }

@@ -16,18 +16,19 @@ enum AppAction {
     case article(ArticleAction)
 }
 
-typealias AppStore = Store<AppState, AppAction>
+struct Environment {
+    @Injected var articleService: ArticleService
+}
+
+typealias AppStore = Store<AppState, AppAction, Environment>
 
 let rootReducer = combineReducers(articleReducer)
 
 func createStore() -> AppStore {
     let store = AppStore(
-        initial: AppState(),
+        initialState: AppState(),
         reducer: rootReducer,
-        middlewares: [
-            EpicMiddleware(epics: [articleEpic]),
-            ThunkMiddleware()
-        ]
+        environment: Environment()
     )
     return store
 }

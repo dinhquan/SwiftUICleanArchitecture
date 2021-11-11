@@ -14,44 +14,18 @@ enum ArticleAction {
     case fetchArticleFailure(error: Error)
 }
 
-func fetchArticle(keyword: String, page: Int) -> Thunk<AppState, AppAction> {
-    return { dispatch, getState in
-        var cancellable = Set<AnyCancellable>()
-        let service: ArticleService = DefaultArticleService()
-        service.searchArticlesByKeyword(keyword, page: page)
-            .sink { completion in
-                switch completion {
-                case .failure(let error):
-                    dispatch(.article(.fetchArticleFailure(error: error)))
-                default: ()
-                }
-            } receiveValue: { articles in
-                dispatch(.article(.fetchArticleSuccess(articles: articles)))
-            }
-            .store(in: &cancellable)
-    }
-}
-
-let articleReducer: Reducer<AppState, AppAction> = { state, action in
-    guard case let .article(articleAction) = action else { return state }
-    var newState = state
+let articleReducer: Reducer<AppState, AppAction, Environment> = { state, action, env in
+    guard case let .article(articleAction) = action else { return Empty().eraseToAnyPublisher() }
     switch articleAction {
-    case .fetchArticleSuccess(let articles):
-        newState.articles = articles
-    default: ()
-    }
-    return newState
-}
-
-let articleEpic: Epic<AppState, AppAction> = { state, action in
-    switch action {
-    case .article(.fetchArticle(let keyword, let page)):
-        let service: ArticleService = DefaultArticleService()
-        return service.searchArticlesByKeyword(keyword, page: page)
+    case let .fetchArticle(keyword, page):
+        return env.articleService.searchArticlesByKeyword(keyword, page: page)
             .map { .article(.fetchArticleSuccess(articles: $0)) }
             .catch { Just(.article(.fetchArticleFailure(error: $0))).eraseToAnyPublisher() }
             .eraseToAnyPublisher()
-    default: ()
+    case let .fetchArticleSuccess(articles):
+        state.articles = articles
+    case let .fetchArticleFailure(error):
+        print("Failed to load article with error \(error.localizedDescription)")
     }
     return Empty().eraseToAnyPublisher()
 }
